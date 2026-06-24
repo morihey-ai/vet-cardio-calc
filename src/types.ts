@@ -57,6 +57,15 @@ export interface EchoInput {
   dWaveCmS: number;
 }
 
+export type LaFsViewKey = "rp4c" | "plax" | "sax" | "a4c";
+
+export interface LaFsViewInput {
+  laMaxCm: number;
+  laMinCm: number;
+}
+
+export type LaFsViewsInput = Record<LaFsViewKey, LaFsViewInput>;
+
 export interface PhScoreInput {
   phRvWall: string;
   phRvDilatation: string;
@@ -81,6 +90,7 @@ export interface ExamRecord {
   actualDose: ActualDoseInput;
   nutrition: NutritionInput;
   echo: EchoInput;
+  laFsViews: LaFsViewsInput;
   phScore: PhScoreInput;
   directMetrics: DirectMetricInput;
   createdAt: string;

@@ -1,6 +1,6 @@
 import formulas from "../config/formulas.json";
 import { evaluateFormula, formatValue } from "../lib/formulaEngine";
-import type { CalculationValue, EchoInput, FormulaDefinition, PatientInfo } from "../types";
+import type { CalculationValue, EchoInput, FormulaDefinition, LaFsViewsInput, PatientInfo } from "../types";
 
 const formulaList = formulas as FormulaDefinition[];
 
@@ -22,7 +22,14 @@ function valueItem(id: string, value: number | null): CalculationValue {
   };
 }
 
-export function calculateEcho(patient: PatientInfo, input: EchoInput): CalculationValue[] {
+const laFsViewLabels: Record<keyof LaFsViewsInput, string> = {
+  rp4c: "LA-FS RP4C",
+  plax: "LA-FS PLAX",
+  sax: "LA-FS SAx",
+  a4c: "LA-FS A4C"
+};
+
+export function calculateEcho(patient: PatientInfo, input: EchoInput, laFsViews?: LaFsViewsInput): CalculationValue[] {
   const lviddn = evaluateFormula(getFormula("lviddn"), {
     species: patient.species,
     lviddCm: input.lviddCm,
@@ -75,6 +82,17 @@ export function calculateEcho(patient: PatientInfo, input: EchoInput): Calculati
     vtiCm: input.lvotVtiCm,
     rrIntervalSec: input.rrIntervalSec
   });
+  const laFsViewValues = laFsViews
+    ? (Object.keys(laFsViewLabels) as Array<keyof LaFsViewsInput>).map((key) => ({
+        ...valueItem("laFs", evaluateFormula(getFormula("laFs"), {
+          laMaxCm: laFsViews[key].laMaxCm,
+          laMinCm: laFsViews[key].laMinCm
+        })),
+        id: `laFs-${key}`,
+        label: laFsViewLabels[key],
+        note: `${laFsViewLabels[key]}: LA max / LA minから算出。`
+      }))
+    : [];
 
   return [
     valueItem("lviddn", lviddn),
@@ -89,6 +107,7 @@ export function calculateEcho(patient: PatientInfo, input: EchoInput): Calculati
       note: "E-wave transmitral peak velocity."
     },
     valueItem("laFs", laFs),
+    ...laFsViewValues,
     valueItem("vtiRatio", vtiRatio),
     {
       ...valueItem("strokeVolume", mvStrokeVolumeMl),

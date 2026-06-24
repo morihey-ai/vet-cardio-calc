@@ -54,11 +54,13 @@ describe("nutrition calculations", () => {
 
 describe("echo calculations", () => {
   it("calculates core echo indices", () => {
-    const results = calculateEcho(record.patient, record.echo);
+    const results = calculateEcho(record.patient, record.echo, record.laFsViews);
     expect(value("lviddn", results)).toBeCloseTo(1.956, 3);
     expect(value("laAo", results)).toBeCloseTo(2.06, 2);
     expect(value("fsPercent", results)).toBeCloseTo(52.1, 1);
     expect(value("laFs", results)).toBeCloseTo(32.5, 1);
+    expect(value("laFs-rp4c", results)).toBeCloseTo(32.5, 1);
+    expect(value("laFs-plax", results)).toBeCloseTo(32.2, 1);
     expect(value("vtiRatio", results)).toBeCloseTo(1.53, 2);
     expect(value("trpg", results)).toBeCloseTo(33.6, 1);
     expect(value("atEt", results)).toBeCloseTo(0.29, 2);

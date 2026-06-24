@@ -54,6 +54,12 @@ export const sampleRecords: ExamRecord[] = [
       sWaveCmS: 35,
       dWaveCmS: 48
     },
+    laFsViews: {
+      rp4c: { laMaxCm: 2.3, laMinCm: 1.6 },
+      plax: { laMaxCm: 2.25, laMinCm: 1.58 },
+      sax: { laMaxCm: 2.18, laMinCm: 1.55 },
+      a4c: { laMaxCm: 2.34, laMinCm: 1.66 }
+    },
     phScore: {
       phRvWall: "normal",
       phRvDilatation: "normal",
@@ -122,6 +128,12 @@ export const sampleRecords: ExamRecord[] = [
       etMs: 178,
       sWaveCmS: 32,
       dWaveCmS: 50
+    },
+    laFsViews: {
+      rp4c: { laMaxCm: 2.4, laMinCm: 1.62 },
+      plax: { laMaxCm: 2.36, laMinCm: 1.6 },
+      sax: { laMaxCm: 2.28, laMinCm: 1.58 },
+      a4c: { laMaxCm: 2.42, laMinCm: 1.64 }
     },
     phScore: {
       phRvWall: "mild",

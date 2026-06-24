@@ -12,7 +12,7 @@ import formulas from "./config/formulas.json";
 import scoreRules from "./config/scoreRules.json";
 import { sampleRecords } from "./data/sampleData";
 import { seedIfEmpty, getRecords, saveRecord } from "./storage/db";
-import type { CalculationValue, DirectMetricInput, EchoInput, ExamRecord, FormulaDefinition, ManualScoreOption, PhScoreInput, ScoreConfig, Species } from "./types";
+import type { CalculationValue, DirectMetricInput, EchoInput, ExamRecord, FormulaDefinition, LaFsViewKey, LaFsViewsInput, ManualScoreOption, PhScoreInput, ScoreConfig, Species } from "./types";
 import { buildCsv, downloadCsv } from "./utils/csv";
 import { buildClinicalText, diffFromPrevious } from "./utils/report";
 
@@ -28,6 +28,13 @@ const quickViews: Array<{ id: FocusView; label: string }> = [
   { id: "lafs", label: "LA-FS" }
 ];
 
+const laFsViewLabels: Record<LaFsViewKey, string> = {
+  rp4c: "RP4C",
+  plax: "PLAX",
+  sax: "SAx",
+  a4c: "A4C"
+};
+
 function normalizeRecord(record: ExamRecord): ExamRecord {
   return {
     ...defaultRecord,
@@ -37,6 +44,7 @@ function normalizeRecord(record: ExamRecord): ExamRecord {
     actualDose: { ...defaultRecord.actualDose, ...record.actualDose },
     nutrition: { ...defaultRecord.nutrition, ...record.nutrition },
     echo: { ...defaultRecord.echo, ...record.echo },
+    laFsViews: { ...defaultRecord.laFsViews, ...record.laFsViews },
     phScore: { ...defaultRecord.phScore, ...record.phScore },
     directMetrics: { ...defaultRecord.directMetrics, ...record.directMetrics }
   };
@@ -173,7 +181,7 @@ function buildValues(record: ExamRecord): CalculationValue[] {
     ...calculateDosage(record.patient, record.dosage),
     ...calculateActualDose(record.patient, record.actualDose),
     ...calculateNutrition(record.patient, record.nutrition),
-    ...calculateEcho(record.patient, record.echo)
+    ...calculateEcho(record.patient, record.echo, record.laFsViews)
   ];
 }
 
@@ -183,6 +191,19 @@ function patchEcho(record: ExamRecord, key: keyof EchoInput, value: number): Exa
 
 function patchDirectMetric(record: ExamRecord, key: keyof DirectMetricInput, value: number | null): ExamRecord {
   return { ...record, directMetrics: { ...record.directMetrics, [key]: value } };
+}
+
+function patchLaFsView(record: ExamRecord, viewKey: LaFsViewKey, key: keyof LaFsViewsInput[LaFsViewKey], value: number): ExamRecord {
+  return {
+    ...record,
+    laFsViews: {
+      ...record.laFsViews,
+      [viewKey]: {
+        ...record.laFsViews[viewKey],
+        [key]: value
+      }
+    }
+  };
 }
 
 function phOptionsFor(key: keyof PhScoreInput) {
@@ -248,6 +269,7 @@ export default function App() {
   const laFsValues = [
     { ...values.find((item) => item.id === "laFs")!, value: scoringValues.laFs as number | null, formatted: current.directMetrics.laFs === null ? values.find((item) => item.id === "laFs")!.formatted : `${current.directMetrics.laFs.toFixed(1)} %（直接）` }
   ];
+  const laFsViewValues = values.filter((item) => item.id.startsWith("laFs-"));
   const phValues = values.filter((item) => ["trpg", "atEt", "pvRecho", "pvRecho2"].includes(item.id));
   const mineScores = scoreResults.filter((score) => ["mine1", "mine2"].includes(score.id));
   const phScores = scoreResults.filter((score) => score.id === "ph");
@@ -397,16 +419,29 @@ export default function App() {
           <section className="panel focus-panel">
             <p className="eyebrow">Quick View</p>
             <h2>LA-FS</h2>
-            <p>LA max / LA minからLA-FSをすぐ確認します。RP4C、PLAX、SAx、A4C別の保存は次の拡張で分けられます。</p>
+            <p>LA max / LA minからLA-FSをすぐ確認します。RP4C、PLAX、SAx、A4Cを別々に入力・保存できます。</p>
           </section>
           <section className="panel">
-            <h2>LA-FS入力</h2>
+            <h2>代表LA-FS入力</h2>
             <div className="patient-grid compact">
               <NumberInput label="LA max" value={current.echo.laMaxCm} unit="cm" onChange={(value) => updateCurrent(patchEcho(current, "laMaxCm", value))} />
               <NumberInput label="LA min" value={current.echo.laMinCm} unit="cm" onChange={(value) => updateCurrent(patchEcho(current, "laMinCm", value))} />
             </div>
           </section>
-          <ValueGrid title="LA-FS結果" values={laFsValues} />
+          <ValueGrid title="代表LA-FS結果" values={laFsValues} />
+          <section className="panel">
+            <h2>ビュー別LA-FS入力</h2>
+            <div className="view-input-grid">
+              {(Object.keys(laFsViewLabels) as LaFsViewKey[]).map((viewKey) => (
+                <div className="subpanel" key={viewKey}>
+                  <h3>{laFsViewLabels[viewKey]}</h3>
+                  <NumberInput label="LA max" value={current.laFsViews[viewKey].laMaxCm} unit="cm" onChange={(value) => updateCurrent(patchLaFsView(current, viewKey, "laMaxCm", value))} />
+                  <NumberInput label="LA min" value={current.laFsViews[viewKey].laMinCm} unit="cm" onChange={(value) => updateCurrent(patchLaFsView(current, viewKey, "laMinCm", value))} />
+                </div>
+              ))}
+            </div>
+          </section>
+          <ValueGrid title="ビュー別LA-FS結果" values={laFsViewValues} />
         </>
       )}
 

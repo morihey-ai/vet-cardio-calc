@@ -221,6 +221,25 @@ textarea {
   gap: 12px;
 }
 
+.view-input-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+.subpanel {
+  border: 1px solid #d9e2dc;
+  border-radius: 8px;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.subpanel h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
 .score-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -301,6 +320,7 @@ footer {
   .patient-grid,
   .patient-grid.compact,
   .value-grid,
+  .view-input-grid,
   .score-grid,
   .formula-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -315,6 +335,7 @@ footer {
   .patient-grid,
   .patient-grid.compact,
   .value-grid,
+  .view-input-grid,
   .score-grid,
   .formula-list {
     grid-template-columns: 1fr;
