@@ -1,0 +1,74 @@
+[
+  {
+    "id": "pimobendan-tablet",
+    "name": "ピモベンダン",
+    "category": "循環器",
+    "form": "tablet",
+    "strengthsMg": [1.25, 2.5, 5, 10],
+    "commonFrequencies": [1, 2],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  },
+  {
+    "id": "furosemide-tablet",
+    "name": "フロセミド",
+    "category": "循環器",
+    "form": "tablet",
+    "strengthsMg": [10, 20, 40],
+    "commonFrequencies": [1, 2, 3],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  },
+  {
+    "id": "torasemide-tablet",
+    "name": "トラセミド",
+    "category": "循環器",
+    "form": "tablet",
+    "strengthsMg": [1, 2.5, 5],
+    "commonFrequencies": [1, 2],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  },
+  {
+    "id": "enalapril-tablet",
+    "name": "エナラプリル",
+    "category": "循環器",
+    "form": "tablet",
+    "strengthsMg": [1, 2.5, 5, 10],
+    "commonFrequencies": [1, 2],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  },
+  {
+    "id": "benazepril-tablet",
+    "name": "ベナゼプリル",
+    "category": "循環器",
+    "form": "tablet",
+    "strengthsMg": [2.5, 5, 10],
+    "commonFrequencies": [1, 2],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  },
+  {
+    "id": "spironolactone-tablet",
+    "name": "スピロノラクトン",
+    "category": "循環器",
+    "form": "tablet",
+    "strengthsMg": [5, 10, 20, 25],
+    "commonFrequencies": [1, 2],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  },
+  {
+    "id": "sildenafil-tablet",
+    "name": "シルデナフィル",
+    "category": "循環器",
+    "form": "tablet",
+    "strengthsMg": [10, 20, 25, 50],
+    "commonFrequencies": [2, 3],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  },
+  {
+    "id": "amlodipine-tablet",
+    "name": "アムロジピン",
+    "category": "一般/循環器",
+    "form": "tablet",
+    "strengthsMg": [1.25, 2.5, 5],
+    "commonFrequencies": [1, 2],
+    "note": "規格選択と実投与量の逆算用。推奨量ではありません。"
+  }
+]

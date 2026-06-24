@@ -1,0 +1,18 @@
+{
+  "name": "Vet Cardio Calc",
+  "short_name": "Vet Cardio",
+  "description": "Local-first calculator for small animal cardiology measurements.",
+  "id": "./",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f4",
+  "theme_color": "#25636b",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "犬": [
+    "MIX",
+    "Cavalier King Charles Spaniel",
+    "Chihuahua",
+    "Toy Poodle",
+    "Miniature Dachshund",
+    "Yorkshire Terrier",
+    "Pomeranian",
+    "Maltese",
+    "Shih Tzu",
+    "Miniature Schnauzer",
+    "Jack Russell Terrier",
+    "French Bulldog",
+    "Shiba Inu",
+    "Cocker Spaniel",
+    "Papillon",
+    "Beagle",
+    "Labrador Retriever",
+    "Golden Retriever"
+  ],
+  "猫": [
+    "MIX",
+    "Domestic Shorthair",
+    "Domestic Longhair",
+    "Scottish Fold",
+    "American Shorthair",
+    "Munchkin",
+    "Russian Blue",
+    "Ragdoll",
+    "Norwegian Forest Cat",
+    "Maine Coon",
+    "Persian",
+    "Bengal",
+    "British Shorthair",
+    "Siamese"
+  ]
+}

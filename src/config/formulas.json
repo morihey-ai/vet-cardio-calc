@@ -1,0 +1,232 @@
+[
+  {
+    "id": "ageYears",
+    "label": "年齢",
+    "category": "patient",
+    "expression": "daysBetween(birthDate, examDate) / 365.2425",
+    "variables": ["birthDate", "examDate"],
+    "unit": "years",
+    "precision": 1,
+    "note": "日付差から暦年換算。"
+  },
+  {
+    "id": "singleDoseMg",
+    "label": "1回量",
+    "category": "dosage",
+    "expression": "bodyWeightKg * doseMgPerKg",
+    "variables": ["bodyWeightKg", "doseMgPerKg"],
+    "unit": "mg",
+    "precision": 2,
+    "note": "mg/kg dose to mg per administration."
+  },
+  {
+    "id": "dailyDoseMg",
+    "label": "1日量",
+    "category": "dosage",
+    "expression": "bodyWeightKg * doseMgPerKg * dosesPerDay",
+    "variables": ["bodyWeightKg", "doseMgPerKg", "dosesPerDay"],
+    "unit": "mg/day",
+    "precision": 2,
+    "note": "mg/kg dose multiplied by frequency."
+  },
+  {
+    "id": "tabletCount",
+    "label": "錠数",
+    "category": "dosage",
+    "expression": "singleDoseMg / tabletStrengthMg",
+    "variables": ["singleDoseMg", "tabletStrengthMg"],
+    "unit": "tabs/dose",
+    "precision": 3,
+    "note": "Single dose divided by tablet strength."
+  },
+  {
+    "id": "liquidVolumeMl",
+    "label": "液量",
+    "category": "dosage",
+    "expression": "singleDoseMg / concentrationMgPerMl",
+    "variables": ["singleDoseMg", "concentrationMgPerMl"],
+    "unit": "mL/dose",
+    "precision": 3,
+    "note": "Single dose divided by concentration."
+  },
+  {
+    "id": "rer",
+    "label": "RER",
+    "category": "nutrition",
+    "expression": "70 * (bodyWeightKg ** 0.75)",
+    "variables": ["bodyWeightKg"],
+    "unit": "kcal/day",
+    "precision": 0,
+    "note": "Resting energy requirement."
+  },
+  {
+    "id": "der",
+    "label": "DER",
+    "category": "nutrition",
+    "expression": "rer * derFactor",
+    "variables": ["rer", "derFactor"],
+    "unit": "kcal/day",
+    "precision": 0,
+    "note": "RER multiplied by clinician-entered factor."
+  },
+  {
+    "id": "foodAmountG",
+    "label": "1日給与量",
+    "category": "nutrition",
+    "expression": "der / kcalPerGram",
+    "variables": ["der", "kcalPerGram"],
+    "unit": "g/day",
+    "precision": 0,
+    "note": "DER divided by food kcal density."
+  },
+  {
+    "id": "lviddn",
+    "label": "LVIDDN",
+    "category": "echo",
+    "expression": "species === '猫' ? lviddCm / (bodyWeightKg ** 0.33) : lviddCm / (bodyWeightKg ** 0.294)",
+    "variables": ["species", "lviddCm", "bodyWeightKg"],
+    "unit": "",
+    "precision": 2,
+    "note": "犬はLVIDd / 体重^0.294、猫はLVIDd / 体重^0.33。採用式は必要に応じて編集してください。"
+  },
+  {
+    "id": "laAo",
+    "label": "LA/Ao",
+    "category": "echo",
+    "expression": "laDiameterCm / aoDiameterCm",
+    "variables": ["laDiameterCm", "aoDiameterCm"],
+    "unit": "",
+    "precision": 2,
+    "note": "Left atrium to aorta ratio."
+  },
+  {
+    "id": "fsPercent",
+    "label": "FS%",
+    "category": "echo",
+    "expression": "((lviddCm - lvidsCm) / lviddCm) * 100",
+    "variables": ["lviddCm", "lvidsCm"],
+    "unit": "%",
+    "precision": 1,
+    "note": "Fractional shortening from LVIDd and LVIDs."
+  },
+  {
+    "id": "laFs",
+    "label": "LA-FS",
+    "category": "echo",
+    "expression": "((laMaxCm - laMinCm) / laMaxCm) * 100",
+    "variables": ["laMaxCm", "laMinCm"],
+    "unit": "%",
+    "precision": 1,
+    "note": "LA fractional shortening from max and min LA dimensions."
+  },
+  {
+    "id": "vtiRatio",
+    "label": "mitral-aortic VTI ratio",
+    "category": "echo",
+    "expression": "mvVtiCm / lvotVtiCm",
+    "variables": ["mvVtiCm", "lvotVtiCm"],
+    "unit": "",
+    "precision": 2,
+    "note": "MV VTI divided by LVOT VTI."
+  },
+  {
+    "id": "rrCorrectedVti",
+    "label": "R-R補正VTI",
+    "category": "echo",
+    "expression": "vtiCm / sqrt(rrIntervalSec)",
+    "variables": ["vtiCm", "rrIntervalSec"],
+    "unit": "cm/sqrt(s)",
+    "precision": 2,
+    "note": "Configurable R-R correction. Edit if your protocol uses another correction."
+  },
+  {
+    "id": "strokeVolume",
+    "label": "Stroke volume",
+    "category": "echo",
+    "expression": "pi * ((diameterCm / 2) ** 2) * vtiCm",
+    "variables": ["diameterCm", "vtiCm"],
+    "unit": "mL",
+    "precision": 1,
+    "note": "CSA times VTI, with cm3 equivalent to mL."
+  },
+  {
+    "id": "rVol",
+    "label": "RVol",
+    "category": "echo",
+    "expression": "mvStrokeVolumeMl - lvotStrokeVolumeMl",
+    "variables": ["mvStrokeVolumeMl", "lvotStrokeVolumeMl"],
+    "unit": "mL",
+    "precision": 1,
+    "note": "Mitral stroke volume minus LVOT stroke volume."
+  },
+  {
+    "id": "rVolKg",
+    "label": "RVol/kg",
+    "category": "echo",
+    "expression": "rVolMl / bodyWeightKg",
+    "variables": ["rVolMl", "bodyWeightKg"],
+    "unit": "mL/kg",
+    "precision": 1,
+    "note": "Regurgitant volume normalized by body weight."
+  },
+  {
+    "id": "rf",
+    "label": "RF",
+    "category": "echo",
+    "expression": "(rVolMl / mvStrokeVolumeMl) * 100",
+    "variables": ["rVolMl", "mvStrokeVolumeMl"],
+    "unit": "%",
+    "precision": 1,
+    "note": "Regurgitant fraction."
+  },
+  {
+    "id": "trpg",
+    "label": "TRPG",
+    "category": "echo",
+    "expression": "4 * (trVelocityMps ** 2)",
+    "variables": ["trVelocityMps"],
+    "unit": "mmHg",
+    "precision": 1,
+    "note": "Simplified Bernoulli equation."
+  },
+  {
+    "id": "atEt",
+    "label": "AT/ET",
+    "category": "echo",
+    "expression": "atMs / etMs",
+    "variables": ["atMs", "etMs"],
+    "unit": "",
+    "precision": 2,
+    "note": "Pulmonary acceleration time divided by ejection time."
+  },
+  {
+    "id": "pulmonaryVeinSd",
+    "label": "肺静脈 S/D",
+    "category": "echo",
+    "expression": "sWaveCmS / dWaveCmS",
+    "variables": ["sWaveCmS", "dWaveCmS"],
+    "unit": "",
+    "precision": 2,
+    "note": "Pulmonary venous S wave divided by D wave."
+  },
+  {
+    "id": "pvRecho",
+    "label": "PVRecho",
+    "category": "echo",
+    "expression": null,
+    "variables": ["trVelocityMps", "pvVtiCm"],
+    "unit": "",
+    "precision": 2,
+    "note": "未設定。採用する文献式を確認してから設定してください。"
+  },
+  {
+    "id": "pvRecho2",
+    "label": "PVRecho2",
+    "category": "echo",
+    "expression": null,
+    "variables": ["trVelocityMps", "pvVtiCm", "trpgMmHg"],
+    "unit": "",
+    "precision": 2,
+    "note": "未設定。採用する文献式を確認してから設定してください。"
+  }
+]

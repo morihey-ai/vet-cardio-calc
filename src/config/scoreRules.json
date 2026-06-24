@@ -1,0 +1,169 @@
+[
+  {
+    "id": "mine1",
+    "label": "MINE score 1",
+    "type": "numeric",
+    "source": "Vezzosi et al. 2021, JVIM 35:1238-1244",
+    "items": [
+      {
+        "key": "laAo",
+        "label": "左房/大動脈比（LA/Ao）",
+        "rules": [
+          { "maxExclusive": 1.7, "points": 1, "reason": "LA/Ao < 1.70" },
+          { "min": 1.7, "max": 1.9, "points": 2, "reason": "LA/Ao 1.70-1.90" },
+          { "minExclusive": 1.9, "max": 2.5, "points": 3, "reason": "LA/Ao 1.91-2.50" },
+          { "minExclusive": 2.5, "points": 4, "reason": "LA/Ao > 2.50" }
+        ]
+      },
+      {
+        "key": "lviddn",
+        "label": "左室拡張末期径 正規化値（LVIDDN）",
+        "rules": [
+          { "maxExclusive": 1.7, "points": 1, "reason": "LVIDDN < 1.70" },
+          { "min": 1.7, "max": 2.0, "points": 2, "reason": "LVIDDN 1.70-2.00" },
+          { "minExclusive": 2.0, "max": 2.3, "points": 3, "reason": "LVIDDN 2.01-2.30" },
+          { "minExclusive": 2.3, "points": 4, "reason": "LVIDDN > 2.30" }
+        ]
+      },
+      {
+        "key": "fsPercent",
+        "label": "左室内径短縮率（FS%）",
+        "rules": [
+          { "maxExclusive": 45, "points": 1, "reason": "FS < 45%" },
+          { "min": 45, "max": 50, "points": 2, "reason": "FS 45-50%" },
+          { "minExclusive": 50, "points": 3, "reason": "FS > 50%" }
+        ]
+      },
+      {
+        "key": "eVelMps",
+        "label": "僧帽弁E波最大速度（E-vel）",
+        "rules": [
+          { "maxExclusive": 1.2, "points": 1, "reason": "E-vel < 1.20 m/s" },
+          { "min": 1.2, "max": 1.5, "points": 2, "reason": "E-vel 1.20-1.50 m/s" },
+          { "minExclusive": 1.5, "points": 3, "reason": "E-vel > 1.50 m/s" }
+        ]
+      }
+    ],
+    "classes": [
+      { "min": 4, "max": 5, "label": "軽度（Mild）" },
+      { "min": 6, "max": 7, "label": "中等度（Moderate）" },
+      { "min": 8, "max": 12, "label": "重度（Severe）" },
+      { "min": 13, "max": 14, "label": "末期相当（Late stage）" }
+    ],
+    "note": "犬MMVD向けのエコー重症度分類。予後情報の補助表示であり、治療推奨ではありません。"
+  },
+  {
+    "id": "mine2",
+    "label": "MINE score 2",
+    "type": "numeric",
+    "source": "Vezzosi et al. 2025, JVIM 39:e70215",
+    "items": [
+      {
+        "key": "laAo",
+        "label": "左房/大動脈比（LA/Ao）",
+        "rules": [
+          { "maxExclusive": 1.7, "points": 1, "reason": "LA/Ao < 1.70" },
+          { "min": 1.7, "max": 1.9, "points": 2, "reason": "LA/Ao 1.70-1.90" },
+          { "minExclusive": 1.9, "max": 2.5, "points": 3, "reason": "LA/Ao 1.91-2.50" },
+          { "minExclusive": 2.5, "points": 4, "reason": "LA/Ao > 2.50" }
+        ]
+      },
+      {
+        "key": "lviddn",
+        "label": "左室拡張末期径 正規化値（LVIDDN）",
+        "rules": [
+          { "maxExclusive": 1.7, "points": 1, "reason": "LVIDDN < 1.70" },
+          { "min": 1.7, "max": 2.0, "points": 2, "reason": "LVIDDN 1.70-2.00" },
+          { "minExclusive": 2.0, "max": 2.3, "points": 3, "reason": "LVIDDN 2.01-2.30" },
+          { "minExclusive": 2.3, "points": 4, "reason": "LVIDDN > 2.30" }
+        ]
+      },
+      {
+        "key": "eVelMps",
+        "label": "僧帽弁E波最大速度（E-vel）",
+        "rules": [
+          { "maxExclusive": 1.2, "points": 1, "reason": "E-vel < 1.20 m/s" },
+          { "min": 1.2, "max": 1.5, "points": 2, "reason": "E-vel 1.20-1.50 m/s" },
+          { "minExclusive": 1.5, "points": 3, "reason": "E-vel > 1.50 m/s" }
+        ]
+      }
+    ],
+    "classes": [
+      { "min": 3, "max": 4, "label": "軽度（Mild）" },
+      { "min": 5, "max": 6, "label": "中等度（Moderate）" },
+      { "min": 7, "max": 10, "label": "重度（Severe）" },
+      { "min": 11, "max": 11, "label": "末期相当（Late stage）" }
+    ],
+    "note": "犬のpreclinical MMVD向け。B2で重度（Severe）の場合、論文上はadvanced B2相当。治療推奨ではありません。"
+  },
+  {
+    "id": "ph",
+    "label": "PH score",
+    "type": "manual",
+    "source": "Chang et al. 2026, JVIM 40:aalag004",
+    "items": [
+      {
+        "key": "phRvWall",
+        "label": "右室壁肥厚（RV wall thickening）",
+        "options": [
+          { "value": "normal", "points": 0, "reason": "正常: RV壁がLV壁より薄い" },
+          { "value": "mild", "points": 1, "reason": "軽度-中等度: RV壁がLV壁と同程度" },
+          { "value": "moderateSevere", "points": 2, "reason": "中等度-重度: RV壁がLV壁より厚い" }
+        ]
+      },
+      {
+        "key": "phRvDilatation",
+        "label": "右室拡大（RV dilatation）",
+        "options": [
+          { "value": "normal", "points": 0, "reason": "正常: RVID <= LVIDの50%" },
+          { "value": "mild", "points": 2, "reason": "軽度: RVID > LVIDの50%" },
+          { "value": "moderate", "points": 4, "reason": "中等度: RVID >= LVIDの75% かつ LVID未満" },
+          { "value": "severe", "points": 6, "reason": "重度: RVID > LVID" }
+        ]
+      },
+      {
+        "key": "phRaEnlargement",
+        "label": "右房拡大（RA enlargement）",
+        "options": [
+          { "value": "normal", "points": 0, "reason": "正常: RAD < LAD" },
+          { "value": "mild", "points": 2, "reason": "軽度: RAD = LAD" },
+          { "value": "moderate", "points": 4, "reason": "中等度: RAD > LAD かつ 1.5 x LAD未満" },
+          { "value": "severe", "points": 6, "reason": "重度: RAD >= 1.5 x LAD" }
+        ]
+      },
+      {
+        "key": "phIvsFlattening",
+        "label": "心室中隔扁平化（IVS flattening）",
+        "options": [
+          { "value": "normal", "points": 0, "reason": "正常: IVS flatteningなし" },
+          { "value": "subtleMild", "points": 2, "reason": "軽度: LV側への偏位はあるが明瞭な扁平化なし" },
+          { "value": "moderateSevere", "points": 4, "reason": "中等度-重度: IVSが明瞭に扁平、またはLV側へ凸" }
+        ]
+      },
+      {
+        "key": "phPaEnlargement",
+        "label": "肺動脈拡大（PA enlargement / PA/Ao）",
+        "options": [
+          { "value": "normal", "points": 0, "reason": "正常: PA/Ao <= 1" },
+          { "value": "mild", "points": 2, "reason": "軽度: PA/Ao > 1 かつ 1.5未満" },
+          { "value": "moderate", "points": 4, "reason": "中等度: PA/Ao >= 1.5 かつ 2未満" },
+          { "value": "severe", "points": 6, "reason": "重度: PA/Ao >= 2" }
+        ]
+      },
+      {
+        "key": "phRvotNotching",
+        "label": "RVOT midsystolic notching",
+        "options": [
+          { "value": "normal", "points": 0, "reason": "なし: RVOT波形にmid-systolic notchingなし" },
+          { "value": "abnormal", "points": 1, "reason": "あり: RVOT波形にmid-systolic notchingあり" }
+        ]
+      }
+    ],
+    "classes": [
+      { "min": 0, "max": 2, "label": "PH score閾値未満" },
+      { "min": 3, "max": 8, "label": "pTRV >= 3.4 m/s相当" },
+      { "min": 9, "max": 25, "label": "pTRV >= 4.3 m/s相当" }
+    ],
+    "note": "25点満点の視覚評価スコア。LA/Ao >= 2のpostcapillary PHでは精度低下が報告されています。確定診断ではありません。"
+  }
+]
