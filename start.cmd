@@ -16,6 +16,6 @@ if errorlevel 1 (
   exit /b 1
 )
 echo Starting local app server...
-start "" powershell -NoProfile -WindowStyle Hidden -Command "Start-Sleep -Seconds 3; Start-Process 'http://127.0.0.1:5173'"
+start "" powershell -NoProfile -WindowStyle Hidden -Command "$url='http://127.0.0.1:5173'; for($i=0; $i -lt 30; $i++){ try { Invoke-WebRequest -Uri $url -UseBasicParsing -TimeoutSec 1 | Out-Null; Start-Process $url; exit 0 } catch { Start-Sleep -Seconds 1 } }; Start-Process $url"
 call "%PNPM%" preview
 pause
