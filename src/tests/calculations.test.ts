@@ -69,10 +69,10 @@ describe("echo calculations", () => {
     expect(value("lviddn", results)).toBeCloseTo(1.82, 2);
   });
 
-  it("leaves unset formulas empty instead of using placeholder values", () => {
+  it("calculates PVRecho and PVRecho2 from TR velocity and PV VTI", () => {
     const results = calculateEcho(record.patient, record.echo);
-    expect(results.find((item) => item.id === "pvRecho")?.value).toBeNull();
-    expect(results.find((item) => item.id === "pvRecho2")?.value).toBeNull();
+    expect(value("pvRecho", results)).toBeCloseTo(0.296, 3);
+    expect(value("pvRecho2", results)).toBeCloseTo(0.858, 3);
   });
 });
 

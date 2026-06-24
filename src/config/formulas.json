@@ -213,20 +213,20 @@
     "id": "pvRecho",
     "label": "PVRecho",
     "category": "echo",
-    "expression": null,
+    "expression": "trVelocityMps / pvVtiCm",
     "variables": ["trVelocityMps", "pvVtiCm"],
     "unit": "",
     "precision": 2,
-    "note": "未設定。採用する文献式を確認してから設定してください。"
+    "note": "Suzuki et al. 2021 Front Vet Sci: peak TR velocity (m/s) / PV VTI (cm)。単位は文献式に準じた指標値。"
   },
   {
     "id": "pvRecho2",
     "label": "PVRecho2",
     "category": "echo",
-    "expression": null,
-    "variables": ["trVelocityMps", "pvVtiCm", "trpgMmHg"],
+    "expression": "(trVelocityMps ** 2) / pvVtiCm",
+    "variables": ["trVelocityMps", "pvVtiCm"],
     "unit": "",
     "precision": 2,
-    "note": "未設定。採用する文献式を確認してから設定してください。"
+    "note": "Suzuki et al. 2021 Front Vet SciのPVRecho2、およびYuchi et al. 2023 JVIMのPVRecho相当: peak TR velocity^2 / PV VTI。"
   }
 ]

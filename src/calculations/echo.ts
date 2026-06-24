@@ -122,8 +122,7 @@ export function calculateEcho(patient: PatientInfo, input: EchoInput): Calculati
     })),
     valueItem("pvRecho2", evaluateFormula(getFormula("pvRecho2"), {
       trVelocityMps: input.trVelocityMps,
-      pvVtiCm: input.pvVtiCm,
-      trpgMmHg: trpg
+      pvVtiCm: input.pvVtiCm
     }))
   ];
 }
